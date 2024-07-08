@@ -22,6 +22,9 @@ response = requests.post(endpoint, json=payload)
 # Check the response
 if response.status_code == 200:
     print("Prediction response:", response.json())
+    print(response.json()["result"])
+    print(torch.argmax(torch.Tensor(response.json()["result"])))
+    #print(torch.max(torch.stack(response.json()["result"]), dim = 0))
 else:
     print("Failed to get prediction. Status code:", response.status_code)
     print("Response:", response.text)
